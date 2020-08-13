@@ -1,0 +1,27 @@
+#!/bin/sh
+# https://pastebin.com/aRCxdVgp
+#url=`dmenu -p "URL/SEARCH:" <&-`
+web=web
+url=`tac ~/.cache/dweb_hist | dmenu -l 10 -p "URL/SEARCH:"` 
+#dweb_hist is where your previous searchs are stored
+case "$url" in
+	*\.*) echo "$url" >> ~/.cache/dweb_hist ; $web "$url" ;;
+	*) comnd=`echo "$url" | cut -d';' -f1`
+	argument=`echo "$url" | sed "s/^.*;//"`
+	case "$comnd" in 
+		"g")echo "searx.lukesmith.xyz/?q=$argument" >> ~/.cache/dweb_hist ; $web "searx.lukesmith.xyz/?q=$argument" ;;
+		"r")echo "old.reddit.com/r/$argument" >> ~/.cache/dweb_hist ; $web "old.reddit.com/r/$argument";; 
+		"y")echo "invidious.snopyta.org/search?q=$argument"  >> ~/.cache/dweb_hist ; $web "invidious.snopyta.org/search?q=$argument";;
+		"i")echo "mail.google.com/mail/?s=q&q=$argument"  >> ~/.cache/dweb_hist ; $web "mail.google.com/mail/?s=q&q=$argument";;
+		"h")notify-send "`echo -e ' *:search\n g:search\n r:reddit\n y:youtube\n i:gmail'`";;
+		*) echo "searx.lukesmith.xyz/?q=$argument" >> ~/.cache/dweb_hist ; $web "searx.lukesmith.xyz/?q=$argument" ;;
+		# in case that you said "g;{ur search text}" it will go to the option "g" and it will put your search text as $argument in its place so it can
+		# run that link for you 
+		# plz change $web to your browser's name
+		# notice i don't use google as my main web search, i like searx, and also notice i don't use youtube, so you can play with them and change them,
+		# also plebbit is bad
+		# if you dont type $comnd;$argument it will treat the whole text as an $argument since there was no "*;" but if you type ; then you're gonna fuck this whole shieet
+		# plz be helpful and kind, i have autism
+	esac;;
+esac
+
