@@ -1,4 +1,5 @@
 #!/bin/bash
+# try slewsys/ed version, that shit fire, it even has macros!
 . /etc/bash_completion
 _complete_function() {
     COMPREPLY=($(compgen -W "$1" -- "${COMP_WORDS[COMP_CWORD]}"))
