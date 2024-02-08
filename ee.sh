@@ -8,7 +8,7 @@ complete -F _complete_function ee.sh
 # TODO: add a function, that takes two argumentes, that define the filename and the filetype and then call the func in each of the cases below
 function et(){
 # rlwrap -r ed -Rv $1 | pygmentize -s -l $2 -f console256 
- rlwrap -r ed -Rv $1 | pygmentize -s -l $2 -f console
+ rlwrap -r ed -R $1 | pygmentize -s -l $2 -f console
 }
 case "$1" in
     *.py | *.pyw | *.pyi | *.jy |*.sage |*.bzl |*.tac)et $1 python;;
@@ -36,5 +36,5 @@ case "$1" in
     *.todo.txt | *.todotxt | todo.txt)et $1 todotxt;;
     *.txt)et $1 text;;
     *.wiki)et $1 wikitext;;
-    *)rlwrap -r ed -v $1;;
+    *)rlwrap -r ed $1;;
 esac
