@@ -1,4 +1,7 @@
 #!/bin/bash
+# this is a script that helps to add syntax highlighiting to
+# ed the standard editor. i no longer use this, since i no longer
+# like to see highlighted text, raw white on black is the divine way. 
 # try slewsys/ed version, that shit fire, it even has macros!
 . /etc/bash_completion
 _complete_function() {
